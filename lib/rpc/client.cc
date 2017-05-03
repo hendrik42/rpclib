@@ -167,8 +167,8 @@ void client::wait_conn() {
     std::unique_lock<std::mutex> lock(pimpl->mut_connection_finished_);
 
     if (!pimpl->is_connected_) {
-        pimpl->conn_finished_.wait(lock);
-        auto result=conn_finished_.wait_for(lock, pimpl->timeout_);
+        // pimpl->conn_finished_.wait(lock);
+        auto result=pimpl->conn_finished_.wait_for(lock, pimpl->timeout_);
         if(result == std::cv_status::timeout){
           throw_timeout("D20170503T102525 TODO");
         }
