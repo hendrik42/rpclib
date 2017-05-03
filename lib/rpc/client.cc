@@ -168,7 +168,9 @@ void client::wait_conn() {
 
     if (!pimpl->is_connected_) {
         // pimpl->conn_finished_.wait(lock);
-        auto result=pimpl->conn_finished_.wait_for(lock, pimpl->timeout_);
+        // auto timeout2=std::chrono::milliseconds(timeout.total_milliseconds());
+        auto timeout2=std::chrono::milliseconds(pimpl->timeout_);
+        auto result=pimpl->conn_finished_.wait_for(lock, timeout2);
         if(result == std::cv_status::timeout){
           throw_timeout("D20170503T102525 TODO");
         }
