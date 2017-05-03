@@ -170,9 +170,8 @@ void client::wait_conn() {
         pimpl->conn_finished_.wait(lock);
         auto result=conn_finished_.wait_for(lock, pimpl->timeout_);
         if(result == std::cv_status::timeout){
-         throw_timeout("D20170503T102525 TODO");
+          throw_timeout("D20170503T102525 TODO");
         }
-      }
     }
 }
 
